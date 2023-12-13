@@ -1,26 +1,38 @@
 import renderToDOM from '../../utils/renderToDom';
 
 const formOrder = () => {
-  const domString = `<form>
-<label for="orderName">Order Name</label>
-<input type="text" id="orderName" name="orderName" required>
+  const domString = `<div class="container mt-5 ">
+  <form>
+    <div class="form-group">
+      <label for="orderName" class="text-white">Order Name</label>
+      <input type="text" class="form-control" id="orderName" name="orderName" required>
+    </div>
 
-<label for="customerPhone">Customer Phone</label>
-<input type="tel" id="customerPhone" name="customerPhone" required>
+    <div class="form-group">
+      <label for="customerPhone" class="text-white">Customer Phone</label>
+      <input type="tel" class="form-control" id="customerPhone" name="customerPhone" required>
+    </div>
 
-<label for="customerEmail">Customer Email</label>
-<input type="email" id="customerEmail" name="customerEmail" required>
+    <div class="form-group">
+      <label for="customerEmail" class="text-white" >Customer Email</label>
+      <input type="email" class="form-control" id="customerEmail" name="customerEmail" required>
+    </div>
 
-<label for="orderType">Order Type</label>
-<select id="orderType" name="orderType" required>
-  <option value="">Select an Order Type</option>
-  <!-- Add options here -->
-</select>
+    <div class="form-group">
+      <label for="orderType" class="text-white" >Order Type</label>
+      <select class="form-control" id="orderType" name="orderType" required>
+        <option value="">Select an Order Type</option>
+        <option value="">walking </option>
+        <option value="">by phone </option>
+        <option value="">online </option>
+      </select>
+    </div>
 
-<button type="submit">Create/Edit Order</button>
-</form>`;
+    <button type="submit" class="btn btn-success">Create/Edit Order</button>
+  </form>
+</div>`;
 
-  renderToDOM('#app', domString);
+  renderToDOM('#view', domString);
 };
 
 export default formOrder;
