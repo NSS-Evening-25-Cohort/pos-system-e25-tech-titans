@@ -4,12 +4,11 @@ import navBar from '../components/shared/navBar';
 
 const startApp = () => {
   domBuilder(); // BUILD THE DOM
-  //domEvents(user);
-  //formEvents(user);
+  // domEvents(user);
+  // formEvents(user);
   navBar();
-  logoutButton(); 
+  logoutButton();
   // navigationEvents(user);
-
 };
 
 export default startApp;
