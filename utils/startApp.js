@@ -4,6 +4,7 @@ import navBar from '../shared/navBar';
 import viewHomePage from '../pages/homepage';
 import navigationEvents from '../events/navigationEvents';
 import domEvents from '../events/domEvents';
+import formEvents from '../events/formEvents';
 
 const startApp = (user) => {
   domBuilder();
@@ -12,6 +13,7 @@ const startApp = (user) => {
   viewHomePage(user);
   navigationEvents();
   domEvents();
+  formEvents(user);
 };
 
 export default startApp;
