@@ -10,6 +10,7 @@ const navigationEvents = () => {
   // View Orders link
   document.querySelector('#view-orders').addEventListener('click', () => {
     console.warn('CLICKED VIEW ORDERS');
+    formOrder();
   });
 
   // Create Orders link
