@@ -1,4 +1,5 @@
 import { signOut } from '../utils/auth';
+import formOrder from '../components/forms/formOrder';
 
 // navigation events
 const domEvents = () => {
@@ -14,6 +15,7 @@ const domEvents = () => {
   // Create Orders link
   document.querySelector('#create-order-btn').addEventListener('click', () => {
     console.warn('CLICKED CREATE ORDER button');
+    formOrder();
   });
 
   document.querySelector('#view-revenue-btn').addEventListener('click', () => {
