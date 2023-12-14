@@ -2,8 +2,8 @@ import renderToDOM from '../../utils/renderToDom';
 
 const formOrder = () => {
   const domString = `<div class="container mt-5 ">
-  <form>
-    <div class="form-group">
+  <form id="submit-order">
+    <div class="form-group" >
       <label for="orderName" class="text-white">Order Name</label>
       <input type="text" class="form-control" id="orderName" name="orderName" required>
     </div>
@@ -28,7 +28,7 @@ const formOrder = () => {
       </select>
     </div>
 
-    <button type="submit" class="btn btn-success">Create/Edit Order</button>
+    <button  type="submit" class="btn btn-success">Create/Edit Order</button>
   </form>
 </div>`;
 
