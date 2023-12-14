@@ -1,5 +1,6 @@
 import { signOut } from '../utils/auth';
 import formOrder from '../components/forms/formOrder';
+
 // navigation events
 const navigationEvents = () => {
   // LOGOUT BUTTON
