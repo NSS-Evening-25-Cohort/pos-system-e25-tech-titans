@@ -1,5 +1,6 @@
 import { signOut } from '../utils/auth';
 import formOrder from '../components/forms/formOrder';
+import itemForm from '../components/forms/itemForm';
 
 // navigation events
 const domEvents = () => {
@@ -20,6 +21,11 @@ const domEvents = () => {
 
   document.querySelector('#view-revenue-btn').addEventListener('click', () => {
     console.warn('CLICKED View Revenue button');
+  });
+
+  document.querySelector('#test-whateves-btn').addEventListener('click', () => {
+    console.warn('CLICKED Test button');
+    itemForm();
   });
 };
 
