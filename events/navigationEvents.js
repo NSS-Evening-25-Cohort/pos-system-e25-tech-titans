@@ -1,4 +1,5 @@
 import { signOut } from '../utils/auth';
+import formOrder from '../components/forms/formOrder';
 
 // navigation events
 const navigationEvents = () => {
@@ -14,6 +15,7 @@ const navigationEvents = () => {
   // Create Orders link
   document.querySelector('#create-order').addEventListener('click', () => {
     console.warn('CLICKED CREATE ORDER');
+    formOrder();
   });
 
   // STRETCH: SEARCH

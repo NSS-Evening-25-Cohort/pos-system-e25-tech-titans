@@ -1,4 +1,6 @@
 import { signOut } from '../utils/auth';
+import formOrder from '../components/forms/formOrder';
+import itemForm from '../components/forms/itemForm';
 
 // navigation events
 const domEvents = () => {
@@ -14,10 +16,16 @@ const domEvents = () => {
   // Create Orders link
   document.querySelector('#create-order-btn').addEventListener('click', () => {
     console.warn('CLICKED CREATE ORDER button');
+    formOrder();
   });
 
   document.querySelector('#view-revenue-btn').addEventListener('click', () => {
     console.warn('CLICKED View Revenue button');
+  });
+
+  document.querySelector('#test-whateves-btn').addEventListener('click', () => {
+    console.warn('CLICKED Test button');
+    itemForm();
   });
 };
 
