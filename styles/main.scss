@@ -1,10 +1,158 @@
-@import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootstrap/scss/bootstrap";
-
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
 
 body {
-  background-color: antiquewhite;
-  color: brown;
-  text-align: center;
+  background-color: black;
+  font-family: monospace;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar-dark .navbar-brand {
+  font-family: "1900.80.5", !important;
+  color: rgb(4, 242, 103);
+  font-weight: 900;
+  font-size: 2em;
+}
+
+.nav-link {
+  border: solid 1px rgb(212, 223, 5);
+  padding: 5px;
+  margin: 5px;
+  justify-content: center;
+}
+
+.logout {
+  margin: 0 20px;
+  font-size: 25px;
+  color: white;
+}
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
   margin-top: 100px;
+  align-content: center;
+
+  #button-row {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 2px;
+    gap: 30px;
+  }
+
+  #category-btn {
+    background-color: rgb(212, 223, 5);
+    color: #fff;
+    text-shadow:
+      1px 1px 0 #000,
+      -1px 1px 0 #000,
+      -1px -1px 0 #000,
+      1px -1px 0 #000;
+  }
+  #form-container {
+    width: 60%;
+    margin: auto;
+    justify-content: center;
+    color: white;
+
+    #formModal {
+      color: black;
+    }
+  }
+
+  #store {
+    width: 90%;
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+    margin: auto;
+    justify-content: center;
+
+    #card {
+      border-color: #fff;
+    }
+    .card {
+      width: 300px;
+      margin: 5px;
+      background-color: #000;
+      border-color: #fff;
+
+      .card-header {
+color:#fff;
+font-style: italic;
+      }
+      .card-title {
+        font-weight: bold;
+        padding-bottom: 5px;
+        font-size: 20px;
+        color:#ff4da6
+      }
+    }
+
+    .table {
+      margin: 10px;
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
+}
+
+#google-auth {
+background-color: rgb(20, 255, 20);
+text-shadow:
+1px 1px 0 #000,
+-1px 1px 0 #000,
+-1px -1px 0 #000,
+1px -1px 0 #000;
+text-align: center;
+justify-content: center;
+}
+
+#view {
+  width: 90%;
+  margin: auto;
+
+  .details {
+    min-width: 50%;
+    max-width: 60%;
+  }
+
+  .description {
+    white-space: pre-wrap;
+  }
+}
+
+#header {
+  max-width: 100px;
+  text-align: center;
+  color: rgb(212, 223, 5);
+  font-size: 80px;
+  font-family: "1900.80.5";
+ 
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+#login {
+display: flex;
+justify-content: center;
+padding-top: 20px;
+margin-left: auto;
+margin-right: auto;
 }
