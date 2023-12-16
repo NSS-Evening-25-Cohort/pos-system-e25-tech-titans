@@ -1,6 +1,8 @@
 import { signOut } from '../utils/auth';
 import formOrder from '../components/forms/formOrder';
-import itemForm from '../components/forms/itemForm';
+// import itemForm from '../components/forms/itemForm';
+import { showCards } from '../pages/showItemCards';
+import getOrderItemCards from '../api/itemData';
 
 // navigation events
 const domEvents = () => {
@@ -25,7 +27,7 @@ const domEvents = () => {
 
   document.querySelector('#test-whateves-btn').addEventListener('click', () => {
     console.warn('CLICKED Test button');
-    itemForm();
+    getOrderItemCards().then(showCards);
   });
 };
 
