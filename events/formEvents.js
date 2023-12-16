@@ -1,6 +1,6 @@
 import { createCustomer, updateCustomer } from '../api/customerData';
 import { createOrder, updateOrder } from '../api/orderData';
-import customerOrder from '../api/mergedData';
+import { customerOrder } from '../api/mergedData';
 
 const formEvents = (user) => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
@@ -15,6 +15,7 @@ const formEvents = (user) => {
       };
 
       const payloadCustomer = {
+        order_name: document.querySelector('#orderName').value,
         customer_phone: document.querySelector('#customerPhone').value,
         customer_email: document.querySelector('#customerEmail').value,
         uid: user.uid

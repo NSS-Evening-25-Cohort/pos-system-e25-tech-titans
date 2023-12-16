@@ -11,8 +11,8 @@ const startApp = (user) => {
   navBar();
   logoutButton();
   viewHomePage(user);
-  navigationEvents();
-  domEvents();
+  navigationEvents(user);
+  domEvents(user);
   formEvents(user);
 };
 
