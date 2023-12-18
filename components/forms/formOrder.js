@@ -1,13 +1,14 @@
 import renderToDOM from '../../utils/renderToDom';
 import clearDom from '../../utils/clearDom';
 
-const formOrder = (orderObjParam = {}) => {
+const formOrder = (data = {}, firebaseKey) => {
+  console.warn(data);
   clearDom();
+  const orderObj = data[firebaseKey];
+  console.warn('this is the object inside the form', data);
 
-  const orderObj = orderObjParam || {};
-  const isUpdate = orderObj.order_id !== undefined;
   const domString = `<div class="container mt-5 ">
-  <form id="${isUpdate ? `update-order-form--${orderObj.order_id}` : 'submit-order'}">
+  <form id="${orderObj.order_id ? `update-order-form--${orderObj.order_id}` : 'submit-order'}">
     <div class="form-group" >
       <label for="orderName" class="text-white">Order Name</label>
       <input type="text" class="form-control" id="orderName"  value ="${orderObj.order_name || ''}" name="orderName" required>

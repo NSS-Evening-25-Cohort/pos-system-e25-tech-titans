@@ -1,38 +1,27 @@
-import { signOut } from '../utils/auth';
-import formOrder from '../components/forms/formOrder';
-// import itemForm from '../components/forms/itemForm';
-import { showCards } from '../pages/showItemCards';
-import getOrderItemCards from '../api/itemData';
-import { getAllOrders } from '../api/orderData';
 import viewOrderCard from '../pages/viewOrderCards';
+import { getAllOrders, getSingleOrder } from '../api/orderData';
 import { getCustomers } from '../api/customerData';
+import formOrder from '../components/forms/formOrder';
 
 const domEvents = (user) => {
-  // LOGOUT BUTTON
-  document.querySelector('#logout-button')
-    .addEventListener('click', signOut);
+  document.querySelector('#main-container').addEventListener('click', (e) => {
+    console.warn('this is e', e);
+    if (e.target.id.includes('view-orders')) {
+      console.warn(e, user);
+      getCustomers(user).then(() => {
+        getAllOrders(user).then(viewOrderCard);
+      });
+    }
 
-  // View Orders link
-  document.querySelector('#view-orders-btn').addEventListener('click', () => {
-    console.warn('CLICKED VIEW ORDERS button', getAllOrders(user));
-    getCustomers(user).then(() => {
-      getAllOrders(user).then(viewOrderCard);
-    });
-  });
+    if (e.target.id.includes('create-order')) {
+      formOrder();
+    }
 
-  // Create Orders link
-  document.querySelector('#create-order-btn').addEventListener('click', () => {
-    console.warn('CLICKED CREATE ORDER button');
-    formOrder();
-  });
-
-  document.querySelector('#view-revenue-btn').addEventListener('click', () => {
-    console.warn('CLICKED View Revenue button');
-  });
-
-  document.querySelector('#test-whateves-btn').addEventListener('click', () => {
-    console.warn('CLICKED Test button');
-    getOrderItemCards().then(showCards);
+    if (e.target.id.includes('edit-btn')) {
+      console.warn('this is e', e.target);
+      const firebaseKey = '-Nln4Nd0Kv6yBapTGykg';
+      getSingleOrder(firebaseKey).then((orderObj) => formOrder(orderObj, firebaseKey));
+    }
   });
 };
 

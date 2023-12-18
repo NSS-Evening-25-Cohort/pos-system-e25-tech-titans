@@ -1,11 +1,12 @@
-import { createCustomer, updateCustomer } from '../api/customerData';
-import { createOrder, updateOrder } from '../api/orderData';
-import { customerOrder } from '../api/mergedData';
+import { createCustomer, updateCustomer, getCustomers } from '../api/customerData';
+import { createOrder, updateOrder, getAllOrders } from '../api/orderData';
+import viewOrderCard from '../pages/viewOrderCards';
 
 const formEvents = (user) => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
-    if (e.target.id.includes('submit-order')) {
+
+    if (e.target.closest('#submit-order')) {
       console.warn(e.target, 'I am here', user.displayName);
 
       const payloadOrder = {
@@ -15,33 +16,27 @@ const formEvents = (user) => {
       };
 
       const payloadCustomer = {
-        order_name: document.querySelector('#orderName').value,
         customer_phone: document.querySelector('#customerPhone').value,
         customer_email: document.querySelector('#customerEmail').value,
         uid: user.uid
       };
 
       // Create Order
-      createOrder(payloadOrder).then(({ name: orderId }) => {
-        const patchPayLoadOrder = { order_id: orderId };
-        updateOrder(patchPayLoadOrder);
+      createOrder(payloadOrder).then((orderResponse) => {
+        const orderId = orderResponse.name;
+        const patchPayloadOrder = { order_id: orderId };
+        updateOrder(patchPayloadOrder);
 
         // Create Customer
-        createCustomer(payloadCustomer).then(({ name: customerId }) => {
-          const patchPayLoadCustomer = { customer_id: customerId };
-          updateCustomer(patchPayLoadCustomer);
-
-          // Use customerOrder function
-          customerOrder(customerId, orderId)
-            .then((combinedData) => {
-              // Handle the combined customer and order data here
-              console.warn('Combined Data:', combinedData);
-            })
-            .catch((error) => console.error('Error with customerOrder:', error));
-        })
-          .catch((error) => console.error('Error creating customer:', error));
-      })
-        .catch((error) => console.error('Error creating order:', error));
+        createCustomer(payloadCustomer).then((customerResponse) => {
+          const customerId = customerResponse.name;
+          const patchPayloadCustomer = { customer_id: customerId };
+          updateCustomer(patchPayloadCustomer);
+          getCustomers(user).then(() => {
+            getAllOrders(user).then(viewOrderCard);
+          });
+        });
+      });
     }
   });
 };
