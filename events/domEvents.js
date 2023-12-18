@@ -5,19 +5,27 @@ import { showCards } from '../pages/showItemCards';
 import getOrderItemCards from '../api/itemData';
 import { getAllOrders } from '../api/orderData';
 import viewOrderCard from '../pages/viewOrderCards';
-import { getCustomers } from '../api/customerData';
+import { getAllCustomers } from '../api/customerData';
 
-const domEvents = (user) => {
+const domEvents = () => {
   // LOGOUT BUTTON
   document.querySelector('#logout-button')
     .addEventListener('click', signOut);
 
-  // View Orders link
-  document.querySelector('#view-orders-btn').addEventListener('click', () => {
-    console.warn('CLICKED VIEW ORDERS button', getAllOrders(user));
-    getCustomers(user).then(() => {
-      getAllOrders(user).then(viewOrderCard);
-    });
+  document.querySelector('#view-orders-btn').addEventListener('click', async () => {
+    try {
+      const [resolvedOrders, resolvedCustomers] = await Promise.all([
+        getAllOrders(),
+        getAllCustomers()
+      ]);
+
+      // Use resolvedOrders and resolvedCustomers as needed
+      viewOrderCard(resolvedOrders, resolvedCustomers);
+      console.warn('CLICKED VIEW ORDERS button', resolvedOrders, resolvedCustomers);
+    } catch (error) {
+      // Handle errors here
+      console.error('Error fetching data:', error);
+    }
   });
 
   // Create Orders link
