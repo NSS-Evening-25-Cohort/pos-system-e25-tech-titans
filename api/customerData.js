@@ -1,5 +1,5 @@
 import client from '../utils/client';
-
+// new commit
 const endpoint = client.databaseURL;
 
 const createCustomer = (payLoad) => new Promise((resolve, reject) => {
