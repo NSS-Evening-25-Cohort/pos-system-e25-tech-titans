@@ -1,16 +1,27 @@
 import { signOut } from '../utils/auth';
 import formOrder from '../components/forms/formOrder';
+import viewOrderCard from '../pages/viewOrderCards';
+// import { getAllOrders } from '../api/orderData';
+// import { getOrderDetails } from '../api/mergedData';
+import { getAllOrders } from '../api/orderData';
+import viewHomePage from '../pages/homepage';
+// import { getAllCustomers } from '../api/customerData';
 
 // navigation events
-const navigationEvents = () => {
+const navigationEvents = (user) => {
   // LOGOUT BUTTON
   document.querySelector('#logout-button')
     .addEventListener('click', signOut);
 
+  // LOGO HOME
+  document.querySelector('#logoHome')
+    .addEventListener('click', () => {
+      viewHomePage(user);
+    });
+
   // View Orders link
   document.querySelector('#view-orders').addEventListener('click', () => {
-    console.warn('CLICKED VIEW ORDERS');
-    formOrder();
+    getAllOrders().then(viewOrderCard);
   });
 
   // Create Orders link

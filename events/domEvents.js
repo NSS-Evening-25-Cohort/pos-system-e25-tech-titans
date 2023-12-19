@@ -1,36 +1,63 @@
-import { signOut } from '../utils/auth';
+// import { signOut } from '../utils/auth';
 import formOrder from '../components/forms/formOrder';
-// import itemForm from '../components/forms/itemForm';
+import itemForm from '../components/forms/itemForm';
 import { showCards } from '../pages/showItemCards';
 import getOrderItemCards from '../api/itemData';
 import showRevenue from '../shared/revenueCard';
 import getRevenue from '../api/revenueData';
+import { getOrderItemCards, deleteSingleItem, getSingleItem } from '../api/itemData';
+import viewOrderCard from '../pages/viewOrderCards';
+import { getAllOrders, getSingleOrder } from '../api/orderData';
+import formOrder from '../components/forms/formOrder';
+import { getCustomers } from '../api/customerData';
 
-// navigation events
-const domEvents = () => {
-  // LOGOUT BUTTON
-  document.querySelector('#logout-button')
-    .addEventListener('click', signOut);
 
-  // View Orders link
-  document.querySelector('#view-orders-btn').addEventListener('click', () => {
-    console.warn('CLICKED VIEW ORDERS button');
-  });
+const domEvents = (user) => {
+  document.querySelector('#main-container').addEventListener('click', (e) => {
+    console.warn('this is e', e);
+    if (e.target.id.includes('view-orders')) {
+      console.warn(e, user);
+      getAllOrders(user).then(viewOrderCard);
+    }
+    if (e.target.id.includes('create-order')) {
+      formOrder();
+    }
 
-  // Create Orders link
-  document.querySelector('#create-order-btn').addEventListener('click', () => {
-    console.warn('CLICKED CREATE ORDER button');
-    formOrder();
-  });
+    // get order item cards by order_id also Firebase key
+    if (e.target.id.includes('details-btn-')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      getOrderItemCards(firebaseKey).then((showCards));
+    }
+
+    // getting the item to edit
+    if (e.target.id.includes('edit-card-btn')) {
+      console.warn('working to edit item, getting the order fb key, but not the item');
+      const [, firebaseKey] = e.target.id.split('--');
+      getSingleItem(firebaseKey).then((itemObj) => itemForm(itemObj));
+    }
+
 
   document.querySelector('#view-revenue-btn').addEventListener('click', () => {
     console.warn('CLICKED View Revenue button');
     getRevenue().then(showRevenue);
   });
+    if (e.target.id.includes('delete-card-btn-')) {
+      // eslint-disable-next-line no-alert
+      if (window.confirm('Want to delete?')) {
+        console.warn('CLICKED DELETE ITEM', e.target.id);
+        const [, firebaseKey] = e.target.id.split('--');
+        deleteSingleItem(firebaseKey).then(() => {
+          getOrderItemCards(firebaseKey).then((showCards));
+        });
+      }
+    }
 
-  document.querySelector('#test-whateves-btn').addEventListener('click', () => {
-    console.warn('CLICKED Test button');
-    getOrderItemCards().then(showCards);
+
+    if (e.target.id.includes('edit-btn')) {
+      console.warn('this is e', e.target);
+      const firebaseKey = '-NlzXH7rZF4_jDH-Paaz';
+      getSingleOrder(firebaseKey).then((orderObj) => formOrder(orderObj, firebaseKey));
+    }
   });
 };
 

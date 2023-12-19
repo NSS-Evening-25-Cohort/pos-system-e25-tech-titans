@@ -37,12 +37,31 @@ const getSingleOrder = (orderId) => new Promise((resolve, reject) => {
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => resolve((data)))
     .catch(reject);
 });
 // get orders
 const getOrders = (uid) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/orders.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'content-Type': 'application/json'
+    }
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
+// get all orders
+const getAllOrders = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/orders.json`, {
     method: 'GET',
     headers: {
       'content-Type': 'application/json'
@@ -73,5 +92,5 @@ const deleteSingleOrder = (orderId) => new Promise((resolve, reject) => {
 });
 
 export {
-  createOrder, updateOrder, deleteSingleOrder, getOrders, getSingleOrder
+  createOrder, updateOrder, deleteSingleOrder, getOrders, getAllOrders, getSingleOrder
 };

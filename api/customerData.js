@@ -58,6 +58,25 @@ const getCustomers = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// get all customers
+const getAllCustomers = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/customers.json`, {
+    method: 'GET',
+    headers: {
+      'content-Type': 'application/json'
+    }
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 // delete Customer
 const deleteSingleCustomers = (customerId) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/customers/${customerId}.json`, {
