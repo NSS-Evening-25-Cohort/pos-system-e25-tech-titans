@@ -28,8 +28,8 @@ const getSingleItem = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getOrderItemCards = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/items.json?orderBy="order_id"&equalTo="-NlR0KAmyAp9GnHz_66e"`, {
+const getOrderItemCards = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/items.json?orderBy="order_id"&equalTo="${firebaseKey}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

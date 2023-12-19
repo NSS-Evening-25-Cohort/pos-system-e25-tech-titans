@@ -9,8 +9,10 @@ const emptyCards = () => {
 const showCards = (array) => {
   clearDom();
   let domString = '';
+  let orderId = '';
   if (array.length > 0) {
     array.forEach((item) => {
+      orderId = item.item_id;
       domString += `
       <div class="card" style="width: 80%; height: 120px; background-color:white;">
         <div class="card-body">
@@ -24,10 +26,10 @@ const showCards = (array) => {
   } else {
     domString = '<h2>No Cards to be displayed</h2>';
   }
-  domString += `
+  domString += `<br>
   <div>
-    <button type="submit" id="addOrderItem" class="btn btn-success">Add Item</button>
-    <button type="submit" id="gotoPayment" class="btn btn-primary">Go To Payment</button>
+    <button type="submit" id="addOrderItem--${orderId}" class="btn btn-success">Add Item</button>
+    <button type="submit" id="gotoPayment--${orderId}" class="btn btn-primary">Go To Payment</button>
   </div>`;
   renderToDOM('#store', domString);
 };

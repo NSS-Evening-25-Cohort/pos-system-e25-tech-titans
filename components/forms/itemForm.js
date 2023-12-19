@@ -11,7 +11,7 @@ const itemForm = (obj = {}) => {
     <label for="itemPrice" class="text-white">Item Price</label><br>
     <input type="text" class="form-control" id="itemPrice" name="itemPrice" placeholder="Enter Item Price" value="${obj.item_price || ''}" required><br>
   </div>
-    <button type="submit" id="orderItem" class="btn btn-success">Create/Edit Order Item</button>
+    <button type="submit" id="update-Item--${obj.order_id}" class="btn btn-success">Create/Edit Order Item</button>
 </form>
 </div>`;
 

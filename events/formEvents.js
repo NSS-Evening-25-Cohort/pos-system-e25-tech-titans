@@ -80,6 +80,21 @@ const formEvents = (user) => {
       });
     }
 
+    if (e.target.id.includes('submit-item')) {
+      console.warn('working to add new item via form with order id');
+      const payload = {
+        item_name: document.querySelector('#itemName').value,
+        item_price: document.querySelector('#itemPrice').value,
+        // order_id: // get id from order
+      };
+      createItem(payload).then(({ name }) => {
+        const patchPayload = { item_id: name };
+        updateSingleItem(patchPayload).then(() => {
+          getOrderItemCards().then(showCards);
+        });
+      });
+    }
+
     if (e.target.id.includes('update-Item')) {
       const [, firebaseKey] = e.target.id.split('--');
       const payload = {
