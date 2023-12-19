@@ -1,6 +1,10 @@
 import { createCustomer, updateCustomer } from '../api/customerData';
 import { createOrder, updateOrder } from '../api/orderData';
 import { customerOrder } from '../api/mergedData';
+import {
+  getOrderItemCards, updateSingleItem, createItem,
+} from '../api/itemData';
+import { showCards } from '../pages/showItemCards';
 
 const formEvents = (user) => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
@@ -42,6 +46,36 @@ const formEvents = (user) => {
           .catch((error) => console.error('Error creating customer:', error));
       })
         .catch((error) => console.error('Error creating order:', error));
+    }
+
+    // form portion of editing and adding items
+
+    if (e.target.id.includes('orderItem')) {
+      const payload = {
+        item_name: document.querySelector('#itemName').value,
+        item_price: document.querySelector('#itemPrice').value,
+        // order_id: // get id from order
+      };
+      createItem(payload).then(({ name }) => {
+        const patchPayload = { item_id: name };
+        updateSingleItem(patchPayload).then(() => {
+          getOrderItemCards().then(showCards);
+        });
+      });
+    }
+
+    if (e.target.id.includes('update-Item')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      const payload = {
+        item_name: document.querySelector('#itemName').value,
+        price: document.querySelector('#itemPrice').value,
+        firebaseKey,
+        item_id: firebaseKey,
+      };
+
+      updateSingleItem(payload).then(() => {
+        getOrderItemCards(/* by order_id */).then(showCards);
+      });
     }
   });
 };
