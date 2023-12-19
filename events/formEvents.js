@@ -1,3 +1,8 @@
+import { customerOrder } from '../api/mergedData';
+import {
+  getOrderItemCards, updateSingleItem, createItem,
+} from '../api/itemData';
+import { showCards } from '../pages/showItemCards';
 import { createCustomer, updateCustomer, getCustomers } from '../api/customerData';
 import { createOrder, updateOrder, getAllOrders } from '../api/orderData';
 import viewOrderCard from '../pages/viewOrderCards';
@@ -38,6 +43,36 @@ const formEvents = (user) => {
             getAllOrders(user).then(viewOrderCard);
           });
         });
+      });
+    }
+
+    // form portion of editing and adding items
+
+    if (e.target.id.includes('orderItem')) {
+      const payload = {
+        item_name: document.querySelector('#itemName').value,
+        item_price: document.querySelector('#itemPrice').value,
+        // order_id: // get id from order
+      };
+      createItem(payload).then(({ name }) => {
+        const patchPayload = { item_id: name };
+        updateSingleItem(patchPayload).then(() => {
+          getOrderItemCards().then(showCards);
+        });
+      });
+    }
+
+    if (e.target.id.includes('update-Item')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      const payload = {
+        item_name: document.querySelector('#itemName').value,
+        price: document.querySelector('#itemPrice').value,
+        firebaseKey,
+        item_id: firebaseKey,
+      };
+
+      updateSingleItem(payload).then(() => {
+        getOrderItemCards(/* by order_id */).then(showCards);
       });
     }
   });

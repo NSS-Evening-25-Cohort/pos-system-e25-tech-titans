@@ -12,7 +12,7 @@ const viewHomePage = (user) => {
   <button id="test-whateves-btn">test</button>`;
 
   renderToDOM('#view', domString);
-  console.warn('user', user);
+  // console.warn('user', user);
 };
 
 export default viewHomePage;

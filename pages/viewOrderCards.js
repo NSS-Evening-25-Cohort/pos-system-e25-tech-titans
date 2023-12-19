@@ -16,9 +16,9 @@ const viewOrderCard = (orderCard) => {
     <p class="card-text">Customer Phone #: ${orders.customer_phone}</p>
     <p class="card-text">Customer Email: ${orders.customer_email}</p>
     <p class="card-text">Order Type: ${orders.order_type}</p>
-    <a href="#" id="details-btn" class="card-link">Details</a>
-    <a href="#" id="edit-btn"  class="card-link">Edit</a>
-    <a href="#" id="delete-btn" class="card-link">Delete</a>
+    <a href="#" id="details-btn--${order.order_id}" class="card-link">Details</a>
+    <a href="#" id="edit-btn--${order.order_id}""  class="card-link">Edit</a>
+    <a href="#" id="delete-btn--${order.order_id}"" class="card-link">Delete</a>
   </div>
 </div>`;
   });
