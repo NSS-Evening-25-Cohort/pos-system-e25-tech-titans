@@ -3,6 +3,8 @@ import formOrder from '../components/forms/formOrder';
 // import itemForm from '../components/forms/itemForm';
 import { showCards } from '../pages/showItemCards';
 import getOrderItemCards from '../api/itemData';
+import showRevenue from '../shared/revenueCard';
+import getRevenue from '../api/revenueData';
 
 // navigation events
 const domEvents = () => {
@@ -23,6 +25,7 @@ const domEvents = () => {
 
   document.querySelector('#view-revenue-btn').addEventListener('click', () => {
     console.warn('CLICKED View Revenue button');
+    getRevenue().then(showRevenue);
   });
 
   document.querySelector('#test-whateves-btn').addEventListener('click', () => {
