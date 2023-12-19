@@ -12,7 +12,6 @@ const domEvents = (user) => {
         getAllOrders(user).then(viewOrderCard);
       });
     }
-
     if (e.target.id.includes('create-order')) {
       formOrder();
     }
