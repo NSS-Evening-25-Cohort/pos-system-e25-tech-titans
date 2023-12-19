@@ -4,7 +4,7 @@ import { showCards } from '../pages/showItemCards';
 import showRevenue from '../shared/revenueCard';
 import getRevenue from '../api/revenueData';
 import viewOrderCard from '../pages/viewOrderCards';
-import { getAllOrders, getSingleOrder } from '../api/orderData';
+import { deleteSingleOrder, getAllOrders, getSingleOrder } from '../api/orderData';
 import { getOrderItemCards, getSingleItem, deleteSingleItem } from '../api/itemData';
 
 const domEvents = (user) => {
@@ -46,8 +46,19 @@ const domEvents = (user) => {
 
     if (e.target.id.includes('edit-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
-      console.warn(firebaseKey);
       getSingleOrder(firebaseKey).then((orderObj) => formOrder(orderObj));
+    }
+
+    // delete orderCard
+    if (e.target.id.includes('delete-btn')) {
+      // eslint-disable-next-line no-alert
+      if (window.confirm('Want to delete?')) {
+        const [, firebaseKey] = e.target.id.split('--');
+        console.warn('delet', firebaseKey);
+        deleteSingleOrder(firebaseKey).then(() => {
+          getAllOrders(user).then(viewOrderCard);
+        });
+      }
     }
   });
 };
