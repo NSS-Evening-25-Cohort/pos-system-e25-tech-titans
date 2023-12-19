@@ -5,6 +5,7 @@ import { showCards } from '../pages/showItemCards';
 import { getOrderItemCards, deleteSingleItem, getSingleItem } from '../api/itemData';
 import viewOrderCard from '../pages/viewOrderCards';
 import { getAllOrders, getSingleOrder } from '../api/orderData';
+import formOrder from '../components/forms/formOrder';
 import { getCustomers } from '../api/customerData';
 
 const domEvents = (user) => {
@@ -12,9 +13,7 @@ const domEvents = (user) => {
     console.warn('this is e', e);
     if (e.target.id.includes('view-orders')) {
       console.warn(e, user);
-      getCustomers(user).then(() => {
-        getAllOrders(user).then(viewOrderCard);
-      });
+      getAllOrders(user).then(viewOrderCard);
     }
     if (e.target.id.includes('create-order')) {
       formOrder();
