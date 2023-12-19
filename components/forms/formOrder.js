@@ -3,6 +3,7 @@ import clearDom from '../../utils/clearDom';
 
 const formOrder = (orderObjParam = {}) => {
   clearDom();
+  console.warn(orderObjParam);
 
   const orderObj = orderObjParam || {};
   const isUpdate = orderObj.order_id !== undefined;
