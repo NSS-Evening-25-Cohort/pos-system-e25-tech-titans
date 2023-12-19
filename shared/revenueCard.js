@@ -1,12 +1,17 @@
+import clearDom from '../utils/clearDom';
 import renderToDOM from '../utils/renderToDom';
 
 const showRevenue = (array) => {
+  clearDom();
+
   let domstring = '';
   let total = 0;
 
   array.forEach((orders) => {
-    total += orders.amount;
-    console.warn(total);
+    if (orders.amount) {
+      total += orders.amount;
+    }
+    console.warn('total', total);
   });
   domstring = `<div class="card border-success mb-3" style="max-width: 18rem;">
   <div class="card-header">Revenue</div>
@@ -20,6 +25,7 @@ const showRevenue = (array) => {
     <li>CREDIT- </li>
     <li>MOBILE- </li>
     </ul>
+  </div>
   </div>`;
   renderToDOM('#store', domstring);
 };

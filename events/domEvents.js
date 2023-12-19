@@ -1,16 +1,11 @@
-// import { signOut } from '../utils/auth';
 import formOrder from '../components/forms/formOrder';
 import itemForm from '../components/forms/itemForm';
 import { showCards } from '../pages/showItemCards';
-import getOrderItemCards from '../api/itemData';
 import showRevenue from '../shared/revenueCard';
 import getRevenue from '../api/revenueData';
 import { getOrderItemCards, deleteSingleItem, getSingleItem } from '../api/itemData';
 import viewOrderCard from '../pages/viewOrderCards';
 import { getAllOrders, getSingleOrder } from '../api/orderData';
-import formOrder from '../components/forms/formOrder';
-import { getCustomers } from '../api/customerData';
-
 
 const domEvents = (user) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -21,6 +16,9 @@ const domEvents = (user) => {
     }
     if (e.target.id.includes('create-order')) {
       formOrder();
+    }
+    if (e.target.id.includes('view-revenue-btn')) {
+      getRevenue().then(showRevenue);
     }
 
     // get order item cards by order_id also Firebase key
@@ -36,13 +34,8 @@ const domEvents = (user) => {
       getSingleItem(firebaseKey).then((itemObj) => itemForm(itemObj));
     }
 
-
-  document.querySelector('#view-revenue-btn').addEventListener('click', () => {
-    console.warn('CLICKED View Revenue button');
-    getRevenue().then(showRevenue);
-  });
     if (e.target.id.includes('delete-card-btn-')) {
-      // eslint-disable-next-line no-alert
+    // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         console.warn('CLICKED DELETE ITEM', e.target.id);
         const [, firebaseKey] = e.target.id.split('--');
@@ -52,7 +45,6 @@ const domEvents = (user) => {
       }
     }
 
-
     if (e.target.id.includes('edit-btn')) {
       console.warn('this is e', e.target);
       const firebaseKey = '-NlzXH7rZF4_jDH-Paaz';
@@ -60,5 +52,4 @@ const domEvents = (user) => {
     }
   });
 };
-
 export default domEvents;

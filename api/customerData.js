@@ -91,5 +91,5 @@ const deleteSingleCustomers = (customerId) => new Promise((resolve, reject) => {
 });
 
 export {
-  createCustomer, updateCustomer, getSingleCustomer, getCustomers, deleteSingleCustomers, endpoint
+  createCustomer, updateCustomer, getSingleCustomer, getCustomers, getAllCustomers, deleteSingleCustomers, endpoint
 };
