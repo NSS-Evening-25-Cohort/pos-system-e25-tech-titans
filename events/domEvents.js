@@ -2,19 +2,14 @@
 import formOrder from '../components/forms/formOrder';
 import itemForm from '../components/forms/itemForm';
 import { showCards } from '../pages/showItemCards';
-import getOrderItemCards from '../api/itemData';
+import { deleteSingleItem, getSingleItem, getOrderItemCards } from '../api/itemData';
 import showRevenue from '../shared/revenueCard';
 import getRevenue from '../api/revenueData';
-import { getOrderItemCards, deleteSingleItem, getSingleItem } from '../api/itemData';
 import viewOrderCard from '../pages/viewOrderCards';
 import { getAllOrders, getSingleOrder } from '../api/orderData';
-import formOrder from '../components/forms/formOrder';
-import { getCustomers } from '../api/customerData';
-
 
 const domEvents = (user) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
-    console.warn('this is e', e);
     if (e.target.id.includes('view-orders')) {
       console.warn(e, user);
       getAllOrders(user).then(viewOrderCard);
@@ -35,12 +30,10 @@ const domEvents = (user) => {
       const [, firebaseKey] = e.target.id.split('--');
       getSingleItem(firebaseKey).then((itemObj) => itemForm(itemObj));
     }
-
-
-  document.querySelector('#view-revenue-btn').addEventListener('click', () => {
-    console.warn('CLICKED View Revenue button');
-    getRevenue().then(showRevenue);
-  });
+    if (e.target.id.includes('view-revenue-btn')) {
+      console.warn('CLICKED View Revenue button');
+      getRevenue().then(showRevenue);
+    }
     if (e.target.id.includes('delete-card-btn-')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
@@ -52,11 +45,10 @@ const domEvents = (user) => {
       }
     }
 
-
     if (e.target.id.includes('edit-btn')) {
-      console.warn('this is e', e.target);
-      const firebaseKey = '-NlzXH7rZF4_jDH-Paaz';
-      getSingleOrder(firebaseKey).then((orderObj) => formOrder(orderObj, firebaseKey));
+      const [, firebaseKey] = e.target.id.split('--');
+      console.warn(firebaseKey);
+      getSingleOrder(firebaseKey).then((orderObj) => formOrder(orderObj));
     }
   });
 };

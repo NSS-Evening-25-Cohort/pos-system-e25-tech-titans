@@ -45,6 +45,25 @@ const formEvents = (user) => {
       });
     }
 
+    // update OrderForm
+    if (e.target.id.includes('update-order-form--')) {
+      console.warn('update-order-form');
+      const [, orderId] = e.target.id.split('--');
+      console.warn(orderId);
+      const payloadUpdateOrder = {
+        order_name: document.querySelector('#orderName').value,
+        order_type: document.querySelector('#orderType').value,
+        customer_phone: document.querySelector('#customerPhone').value,
+        customer_email: document.querySelector('#customerEmail').value,
+        uid: user.uid,
+        order_id: orderId
+      };
+      updateOrder(payloadUpdateOrder);
+      getCustomers(user).then(() => {
+        getAllOrders(user).then(viewOrderCard);
+      });
+    }
+
     // form portion of editing and adding items
 
     if (e.target.id.includes('orderItem')) {

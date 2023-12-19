@@ -37,7 +37,7 @@ const getSingleOrder = (orderId) => new Promise((resolve, reject) => {
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve((data)))
+    .then((data) => resolve(Object.values(data)[0]))
     .catch(reject);
 });
 // get orders
