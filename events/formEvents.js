@@ -1,4 +1,3 @@
-import { customerOrder } from '../api/mergedData';
 import {
   getOrderItemCards, updateSingleItem, createItem,
 } from '../api/itemData';

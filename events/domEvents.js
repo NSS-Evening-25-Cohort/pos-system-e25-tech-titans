@@ -1,13 +1,11 @@
-import { signOut } from '../utils/auth';
+// import { signOut } from '../utils/auth';
 import formOrder from '../components/forms/formOrder';
 import itemForm from '../components/forms/itemForm';
 import { showCards } from '../pages/showItemCards';
 import { getOrderItemCards, deleteSingleItem, getSingleItem } from '../api/itemData';
-import { getAllOrders } from '../api/orderData';
 import viewOrderCard from '../pages/viewOrderCards';
 import { getAllOrders, getSingleOrder } from '../api/orderData';
 import { getCustomers } from '../api/customerData';
-import formOrder from '../components/forms/formOrder';
 
 const domEvents = (user) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -21,10 +19,8 @@ const domEvents = (user) => {
     if (e.target.id.includes('create-order')) {
       formOrder();
     }
-  });
 
-  // get order item cards by order_id also Firebase key
-  document.querySelector('#main-container').addEventListener('click', (e) => {
+    // get order item cards by order_id also Firebase key
     if (e.target.id.includes('details-btn-')) {
       const [, firebaseKey] = e.target.id.split('--');
       getOrderItemCards(firebaseKey).then((showCards));
@@ -47,8 +43,6 @@ const domEvents = (user) => {
         });
       }
     }
-  });
-
 
     if (e.target.id.includes('edit-btn')) {
       console.warn('this is e', e.target);
