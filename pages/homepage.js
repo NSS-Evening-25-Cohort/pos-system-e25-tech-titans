@@ -16,7 +16,7 @@ const viewHomePage = (user) => {
   </div>`;
 
   renderToDOM('#view', domString);
-  console.warn('user', user);
+  // console.warn('user', user);
 };
 
 export default viewHomePage;

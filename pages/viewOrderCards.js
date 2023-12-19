@@ -3,17 +3,15 @@ import renderToDOM from '../utils/renderToDom';
 
 const viewOrderCard = (orderCard) => {
   clearDom();
-
   let domString = '';
 
   orderCard.forEach((orders) => {
-    console.warn('order', orders);
     domString += `
 <div class="card border-light mb-3" style="width: 18rem;">
 <div class="card-header bg-transparent border-success">
   <div class="card-body">
     <h5 class="card-title">${orders.order_name}</h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary">${orders.order_status}</h6>
+    <h6 class="card-subtitle mb-2 text-body-secondary">Order Status</h6>
     <p class="card-text">Customer Phone #: ${orders.customer_phone}</p>
     <p class="card-text">Customer Email: ${orders.customer_email}</p>
     <p class="card-text">Order Type: ${orders.order_type}</p>
