@@ -12,6 +12,8 @@ const formEvents = (user) => {
       const payloadOrder = {
         order_name: document.querySelector('#orderName').value,
         order_type: document.querySelector('#orderType').value,
+        customer_phone: document.querySelector('#customerPhone').value,
+        customer_email: document.querySelector('#customerEmail').value,
         uid: user.uid
       };
 
@@ -21,17 +23,17 @@ const formEvents = (user) => {
         uid: user.uid
       };
 
-      // Create Order
-      createOrder(payloadOrder).then((orderResponse) => {
-        const orderId = orderResponse.name;
-        const patchPayloadOrder = { order_id: orderId };
-        updateOrder(patchPayloadOrder);
+      // Create Customer
+      createCustomer(payloadCustomer).then((customerResponse) => {
+        const customerId = customerResponse.name;
+        const patchPayloadCustomer = { customer_id: customerId };
+        updateCustomer(patchPayloadCustomer);
 
-        // Create Customer
-        createCustomer(payloadCustomer).then((customerResponse) => {
-          const customerId = customerResponse.name;
-          const patchPayloadCustomer = { customer_id: customerId };
-          updateCustomer(patchPayloadCustomer);
+        // Create Order
+        createOrder(payloadOrder).then((orderResponse) => {
+          const orderId = orderResponse.name;
+          const patchPayloadOrder = { order_id: orderId };
+          updateOrder(patchPayloadOrder);
           getCustomers(user).then(() => {
             getAllOrders(user).then(viewOrderCard);
           });
