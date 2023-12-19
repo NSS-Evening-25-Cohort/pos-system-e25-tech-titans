@@ -1,12 +1,11 @@
-// import { signOut } from '../utils/auth';
 import formOrder from '../components/forms/formOrder';
 import itemForm from '../components/forms/itemForm';
 import { showCards } from '../pages/showItemCards';
-import { deleteSingleItem, getSingleItem, getOrderItemCards } from '../api/itemData';
 import showRevenue from '../shared/revenueCard';
 import getRevenue from '../api/revenueData';
 import viewOrderCard from '../pages/viewOrderCards';
 import { getAllOrders, getSingleOrder } from '../api/orderData';
+import { getOrderItemCards, getSingleItem, deleteSingleItem } from '../api/itemData';
 
 const domEvents = (user) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -16,6 +15,9 @@ const domEvents = (user) => {
     }
     if (e.target.id.includes('create-order')) {
       formOrder();
+    }
+    if (e.target.id.includes('view-revenue-btn')) {
+      getRevenue().then(showRevenue);
     }
 
     // get order item cards by order_id also Firebase key
@@ -30,12 +32,9 @@ const domEvents = (user) => {
       const [, firebaseKey] = e.target.id.split('--');
       getSingleItem(firebaseKey).then((itemObj) => itemForm(itemObj));
     }
-    if (e.target.id.includes('view-revenue-btn')) {
-      console.warn('CLICKED View Revenue button');
-      getRevenue().then(showRevenue);
-    }
+
     if (e.target.id.includes('delete-card-btn-')) {
-      // eslint-disable-next-line no-alert
+    // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         console.warn('CLICKED DELETE ITEM', e.target.id);
         const [, firebaseKey] = e.target.id.split('--');
@@ -52,5 +51,4 @@ const domEvents = (user) => {
     }
   });
 };
-
 export default domEvents;
