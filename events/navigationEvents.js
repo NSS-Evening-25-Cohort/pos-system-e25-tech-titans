@@ -19,12 +19,9 @@ const navigationEvents = () => {
         getAllOrders(),
         getAllCustomers()
       ]);
-
-      // Use resolvedOrders and resolvedCustomers as needed
       viewOrderCard(resolvedOrders, resolvedCustomers);
       console.warn('CLICKED VIEW ORDERS button', resolvedOrders, resolvedCustomers);
     } catch (error) {
-      // Handle errors here
       console.error('Error fetching data:', error);
     }
   });
