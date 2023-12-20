@@ -81,22 +81,23 @@ const formEvents = (user) => {
     }
 
     if (e.target.id.includes('submit-item')) {
-      console.warn('working to add new item via form with order id');
+      const [, firebaseKey] = e.target.id.split('--');
       const payload = {
         item_name: document.querySelector('#itemName').value,
         item_price: document.querySelector('#itemPrice').value,
-        // order_id: // get id from order
+        order_id: firebaseKey
       };
       createItem(payload).then(({ name }) => {
         const patchPayload = { item_id: name };
         updateSingleItem(patchPayload).then(() => {
-          getOrderItemCards().then(showCards);
+          getOrderItemCards(firebaseKey).then(showCards);
         });
       });
     }
 
-    if (e.target.id.includes('update-Item')) {
+    if (e.target.id.includes('update-Item-')) {
       const [, firebaseKey] = e.target.id.split('--');
+      console.warn('should be showing order item cards after the create/edit order item button was pressed 1 of 2');
       const payload = {
         item_name: document.querySelector('#itemName').value,
         price: document.querySelector('#itemPrice').value,
@@ -104,6 +105,7 @@ const formEvents = (user) => {
         item_id: firebaseKey,
       };
 
+      console.warn('should be showing order item cards after the create/edit order item button was pressed');
       updateSingleItem(payload).then(() => {
         getOrderItemCards(/* by order_id */).then(showCards);
       });

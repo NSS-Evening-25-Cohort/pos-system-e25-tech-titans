@@ -12,7 +12,6 @@ const viewHomePage = (user) => {
   <button class="homepage" id="view-orders-btn">View Orders</button>
   <button class="homepage" id="create-order-btn">Create an Order</button>
   <button class="homepage" id="view-revenue-btn">View Revenue</button>
-  <button class="homepage" id="test-whateves-btn">test</button>
   </div>`;
 
   renderToDOM('#view', domString);

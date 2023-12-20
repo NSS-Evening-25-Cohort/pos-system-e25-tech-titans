@@ -6,13 +6,13 @@ const emptyCards = () => {
   renderToDOM('#store', domString);
 };
 
-const showCards = (array) => {
+const showCards = (array, orderId) => {
   clearDom();
   let domString = '';
-  let orderId = '';
+  // let itemId = '';
   if (array.length > 0) {
     array.forEach((item) => {
-      orderId = item.item_id;
+      // itemId = item.item_id;
       domString += `
       <div class="card" style="width: 80%; height: 120px; background-color:white;">
         <div class="card-body">
