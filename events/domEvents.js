@@ -5,7 +5,9 @@ import showRevenue from '../shared/revenueCard';
 import getRevenue from '../api/revenueData';
 import viewOrderCard from '../pages/viewOrderCards';
 import { deleteSingleOrder, getAllOrders, getSingleOrder } from '../api/orderData';
-import { getOrderItemCards, getSingleItem, deleteSingleItem } from '../api/itemData';
+import {
+  getOrderItemCards, getSingleItem, deleteSingleItem, createItem, updateSingleItem
+} from '../api/itemData';
 
 const domEvents = (user) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -23,7 +25,7 @@ const domEvents = (user) => {
     // get order item cards by order_id also Firebase key
     if (e.target.id.includes('details-btn-')) {
       const [, firebaseKey] = e.target.id.split('--');
-      getOrderItemCards(firebaseKey).then((itemObj) => showCards(itemObj));
+      getOrderItemCards(firebaseKey).then((itemObj) => showCards(itemObj, firebaseKey));
     }
 
     // getting the item to edit
@@ -47,6 +49,40 @@ const domEvents = (user) => {
           getOrderItemCards(firebaseKey).then((showCards));
         });
       }
+    }
+
+    if (e.target.id.includes('submit-Item')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      console.warn(firebaseKey);
+      const payload = {
+        item_name: document.querySelector('#itemName').value,
+        item_price: document.querySelector('#itemPrice').value,
+        order_id: firebaseKey
+      };
+      console.warn(payload);
+      createItem(payload).then(({ name }) => {
+        console.warn('working to add new item via form with order id and name it this fbkey=>', name);
+        const patchPayload = { item_id: name };
+        updateSingleItem(patchPayload).then(() => {
+          getOrderItemCards(firebaseKey).then(showCards);
+        });
+      });
+    }
+
+    if (e.target.id.includes('update-Item')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      console.warn(firebaseKey);
+      const payload = {
+        item_name: document.querySelector('#itemName').value,
+        item_price: document.querySelector('#itemPrice').value,
+        order_id: firebaseKey// get id from order
+      };
+      createItem(payload).then(({ name }) => {
+        const patchPayload = { item_id: name };
+        updateSingleItem(patchPayload).then(() => {
+          getOrderItemCards(firebaseKey).then(showCards);
+        });
+      });
     }
 
     if (e.target.id.includes('edit-btn')) {
